@@ -1,9 +1,6 @@
 ## str_maxlenoc
 ## File description: This C make file can help to build the str_maxlenoc program/executable.
 
-
-# It is likely that default C compiler is already gcc, but explicitly
-# set, just to be sure
 CC = gcc
 
 # The CFLAGS variable sets compile flags for gcc:
@@ -17,17 +14,12 @@ CFLAGS = -g -Wall -Werror -Wextra -O0 -fsanitize=address
 LDFLAGS = -lm
 
 # In this section, you list the files that are part of the project.
-# If you add/change names of source files, here is where you
-# edit the Makefile.
 SOURCES = main.c
 OBJECTS = $(SOURCES:.c=.o)
 TARGET = read_quotes
 
-
 # The first target defined in the makefile is the one
-# used when make is invoked with no argument. Given the definitions
-# above, this Makefile file will build the one named TARGET and
-# assume that it depends on all the named OBJECTS files.
+# used when make is invoked with no argument. 
 
 $(TARGET) : $(OBJECTS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
