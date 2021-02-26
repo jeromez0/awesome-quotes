@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
-
+#include <time.h>
 
 int file_read(char* argv) {
 
     int fdes;
     char buffer[1];
-    int r;
+    int r, counter = 0;
 
     fdes = open(argv, O_RDONLY);
     if (fdes == -1) {
@@ -24,16 +24,26 @@ int file_read(char* argv) {
             break;
         }
         putchar(buffer[0]);
+        counter++;
     }
     close(fdes);
+
+    printf("\nTotal number of characters: %d\n", counter);
 
     return(0);
 }
 
 int main(int argc, char* argv[]) {
 
-    if (argc==2) {
+    if (argc==2) {        
+        clock_t t;
+
+        t = clock();            
         file_read(argv[1]);
+        t = clock() - t;
+        
+        double time_taken = ((double)t)/CLOCKS_PER_SEC;
+        printf("This function took %f seconds to execute\n", time_taken);
         return(0);
     }
 
